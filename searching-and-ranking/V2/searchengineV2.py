@@ -51,6 +51,7 @@ class crawler:
     # Extract the text from an HTML page (no tags)
     # For details, check [Navigate the parse tree in BeautifulSoup]
     # ref: https://www.crummy.com/software/BeautifulSoup/bs3/documentation.html#contents
+    # and stackoverflow: https://stackoverflow.com/questions/16835449/python-beautifulsoup-extract-text-between-element
     def gettextonly(self, soup):
         v = soup.string
         if v == None:

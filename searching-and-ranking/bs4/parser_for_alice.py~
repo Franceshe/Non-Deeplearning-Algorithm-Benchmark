@@ -1,0 +1,12 @@
+import alice_in_wonderland
+from bs4 import BeautifulSoup
+
+input_html = alice_in_wonderland.load_html()
+
+def get_clean_html(target):
+    soup = BeautifulSoup(target, 'html.parser')
+    result = soup.prettify()
+    return result
+
+test_clean = get_clean_html(input_html)
+print(test_clean)
