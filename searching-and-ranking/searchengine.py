@@ -1,0 +1,86 @@
+import urllib
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+
+# Create a list of words to ignore
+ignorewords = set(['the', 'of', 'to', 'and','a', 'in', 'is','it'])
+
+class Crawler:
+    #Initialize the crawler with the name of database#
+#    def __init__(self, dbname):
+    def __init__(self, dbname):
+        pass
+
+    def __del__(self):
+        pass
+
+    def dbcommit(self):
+        pass
+
+    #Auxilirary func for getting an entry id and adding#
+    #it if it is not present#
+    def getentryid(self, table, field, value, createnew=True):
+        return None
+
+    # Index an indivisual page
+    def addtoindex(self, url, soup):
+        print('Indexing %s' % url)
+
+    # Extract the text from HTML page (NO TAG)
+    def gettextonly(self, soup):
+        return None
+
+    # Seperate the text words by non-whitespace character
+    def Seperatewords(self, text):
+        return None
+
+    # Return true if this url is already indexed
+    def isindexed(self, url):
+        return False
+
+    # Add a link between two pages
+    def addlinkref(self, urlFrom, urlTo, linkText):
+        pass
+
+
+    # Starting with a list of pages
+    # Do a breadth first search to the given depth,
+    # indexing pages as we go
+    def crawl(self, pages, depth=2):
+        for i in range(depth):
+            newpages = set()
+            # loops through the list of pages
+            for page in pages:
+                try:
+                    c = urllib.request.urlopen(page)
+                except:
+                    print("Could not open *s" %page)
+                    continue
+                soup = BeautifulSoup(c.read())
+                self.addtoindex(page, soup)
+
+                # Use bsoup to get all links on that page
+                # and add their URLS to newpages
+                links = soup('a')
+                for link in links:
+                    if ('href' in dict(link.attrs)):
+                        url = urljoin(page, link['href'])
+                        if url.find("'") != -1: continue
+                        # remove location option
+                        url = url.split("#")[0]
+                        if url[0: 4] == "http" and not self.isindexed(url):
+                            newpages.add(url)
+                        linkText = self.gettextonly(link)
+                        self.addlinkref(page, url, linkText)
+                self.dbcommit()
+            page = newpages
+
+    # Create the database table
+    def Createindextables(self):
+        pass
+
+    
+
+    
+
+    
