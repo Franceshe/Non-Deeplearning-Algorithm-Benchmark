@@ -72,6 +72,7 @@ class crawler:
         return [s.lower() for s in splitter.split(text) if s!='']
 
     # Return true if this url is already indexed
+    # Which determined whether the page is already in databse
     def isindexed(self, url):
         u = self.con.execute("select rowid from urllist where url='%s'" % url).fetchone()
         if u!=None:
