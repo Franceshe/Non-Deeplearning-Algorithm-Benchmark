@@ -65,6 +65,8 @@ class crawler:
             return v.strip()
 
     # Separate the words by any non-whitespace character
+    # Which splits a string into a list of seperate words
+    # so that they can be added to index
     def separatewords(self, text):
         splitter = re.compile('\\W*')
         return [s.lower() for s in splitter.split(text) if s!='']
@@ -89,18 +91,18 @@ class crawler:
     # Table3: wordlocation- a list of the locations of words in the documents.
     # Table 4 and 5: link and linkwords specify link between documents
         def createindextables(self):
-        self.con.execute('create table urllist(url)')
-        self.con.execute('create table wordlist(word)')
-        self.con.execute('create table wordlocation(urlid, wordid, location)')
-        self.con.execute('create table link(fromid integer,toid integer)')
-        self.con.execute('create table linkwords(wordid,linkid)')
-        # Add some indices to speed up searching
-        self.con.execute('create index wordidx on wordlist(word)')
-        self.con.execute('create index urlidx on urllist(url)')
-        self.con.execute('create index wordurlidx on wordlocation(wordid)')
-        self.con.execute('create index urltoidx on link(toid)')
-        self.con.execute('create index urlfromidx on link(fromid)')
-        self.dbcommit( )
+            self.con.execute('create table urllist(url)')
+            self.con.execute('create table wordlist(word)')
+            self.con.execute('create table wordlocation(urlid, wordid, location)')
+            self.con.execute('create table link(fromid integer,toid integer)')
+            self.con.execute('create table linkwords(wordid,linkid)')
+            # Add some indices to speed up searching
+            self.con.execute('create index wordidx on wordlist(word)')
+            self.con.execute('create index urlidx on urllist(url)')
+            self.con.execute('create index wordurlidx on wordlocation(wordid)')
+            self.con.execute('create index urltoidx on link(toid)')
+            self.con.execute('create index urlfromidx on link(fromid)')
+            self.dbcommit( )
 
 
     # Starting with a list of pages, do a BFS to the given depth, indexing pages as we go
