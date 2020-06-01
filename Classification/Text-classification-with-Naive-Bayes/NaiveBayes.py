@@ -1,5 +1,6 @@
 import re, os
 
+/*include all functions needed */
 class BagOfWords(object):
     """ Implementing a bag of words, words corresponding with their 
         frequency of usages in a "document" for usage by the Document 
