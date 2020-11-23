@@ -18,3 +18,6 @@
 ## Classifiers
 * Bayesian Classifier
 * Decision Tree Classifier
+
+## Intest Graph
+* Graph centrality algorithms, including degree, betweenness, and closeness centrality
